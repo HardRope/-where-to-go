@@ -44,7 +44,14 @@ class PlaceImage(models.Model):
     place = models.ForeignKey(
         'Place',
         on_delete=models.CASCADE,
-        related_name='images'
+        related_name='images',
+    )
+
+    title = models.CharField(
+        'Название',
+        max_length=200,
+        blank=True,
+        null=True,
     )
 
     image = models.ImageField(
