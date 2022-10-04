@@ -35,6 +35,9 @@ class Place(models.Model):
         null=True,
     )
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'место'
         verbose_name_plural = 'места'
@@ -58,6 +61,9 @@ class PlaceImage(models.Model):
         blank=True,
         null=True,
     )
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'изображение'
