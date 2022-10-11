@@ -18,7 +18,11 @@ class PlaceImageAdmin(admin.ModelAdmin):
 
 class PlaceImageInline(admin.TabularInline):
     model = PlaceImage
-    fields = ('image', 'position',)
+    fields = ('image',  'preview', 'position',)
+
+    readonly_fields = ("preview",)
+    def preview(self, model):
+        return mark_safe(f'<img src="{model.image.url}" style="max-height: 200px;">')
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
