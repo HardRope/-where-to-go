@@ -7,6 +7,7 @@ class PlaceImageAdmin(admin.ModelAdmin):
     fields = (
         'title',
         'image',
+        'position',
         'preview',
     )
 
@@ -17,6 +18,7 @@ class PlaceImageAdmin(admin.ModelAdmin):
 
 class PlaceImageInline(admin.TabularInline):
     model = PlaceImage
+    fields = ('image', 'position',)
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
