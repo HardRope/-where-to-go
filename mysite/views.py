@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from places.models import Place, PlaceImage
 
 def show_main(request):
@@ -16,7 +17,7 @@ def show_main(request):
             "properties": {
                 "title": location.title,
                 "placeId": location.id,
-                "detailsUrl": ""
+                "detailsUrl": reverse('places', args=[location.id]),
             }
         }
         locations_format_geojson.append(formatted_location)
@@ -29,11 +30,12 @@ def show_main(request):
     }
     return render(request, 'index.html', context=context)
 
+
 def place_view(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     context = {
         'title': place.title,
-        'img': [image.image.url for image in place.images.all()],
+        'imgs': [image.image.url for image in place.images.all()],
         'description_short': place.description_short,
         'description_long': place.description_long,
         'coordinates': {
