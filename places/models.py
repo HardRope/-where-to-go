@@ -63,15 +63,17 @@ class PlaceImage(models.Model):
     )
 
     position = models.IntegerField(
+        default=1,
         blank=True,
         null=True,
+        db_index=True
     )
 
     def __str__(self):
-        return self.title
+        return self.image.name
 
     class Meta:
         verbose_name = 'изображение'
         verbose_name_plural = 'изображения'
-        unique_together = ['place', 'position',]
+        ordering = ('position',)
 
