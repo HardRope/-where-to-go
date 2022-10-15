@@ -4,6 +4,8 @@ Project created to share interesting Moscow places and give some information abo
 
 Starting server create map, where marked places from database with their description and photos.
 
+Link for working site: https://hardrope.pythonanywhere.com/
+
 ## Preview
 
 ![img.png](static/images/site_preview.png)
