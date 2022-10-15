@@ -24,6 +24,7 @@ class PlaceImageInline(SortableStackedInline):
     fields = ['image',  'preview', ]
 
     readonly_fields = ("preview",)
+
     def preview(self, model):
         return mark_safe(f'<img src="{model.image.url}" style="max-height: 200px;">')
 
@@ -42,8 +43,3 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
         'lng',
         'lat',)
     inlines = (PlaceImageInline,)
-
-    # @admin.display(ordering='place__images', description='Images')
-    # def get_images(self, obj):
-    #     return obj.images.all()
-

@@ -31,7 +31,7 @@ def show_main(request):
     return render(request, 'index.html', context=context)
 
 
-def place_view(request, place_id):
+def get_place_json(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     context = {
         'title': place.title,
