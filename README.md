@@ -50,4 +50,22 @@ MEDIA_ROOT= media files dir name
 
 ```commandline
 python3 manage.py createsuperuser
+```
 
+## Help function
+
+To loading places info from url with JSON-data< looking like:
+
+```commandline
+{
+    "title": "Place_name",
+    "imgs": [
+        list of images urls
+    ],
+    "description_short": short descriptions (str)
+    "description_long": long description (may contains html-tags)
+    "coordinates": {
+        "lng": "99.99999",
+        "lat": "99.9999999"
+    }
+```
