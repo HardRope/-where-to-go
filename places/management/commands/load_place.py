@@ -7,6 +7,7 @@ from places.models import Place, PlaceImage
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
 
+
 def add_imgs_to_place(place, num, url):
     try:
         response = requests.get(url)
@@ -20,7 +21,7 @@ def add_imgs_to_place(place, num, url):
         )
 
         place_image.image.save(f'{image_title}.jpg', ContentFile(response.content), save=True)
-    except:
+    except requests.HTTPError:
         logging.info('Не удалось загрузить изображение')
 
 
@@ -53,12 +54,12 @@ def main(url):
         place_json = response.json()
 
         add_place(place_json)
-    except:
-        logging.info('Ошыпка')
+    except requests.HTTPError:
+        logging.info('Ошиибка загрузки. Проверьте ссылку')
 
 
 class Command(BaseCommand):
-    help = ''
+    help = 'Loading place to db from url with json'
 
     def handle(self, *args, **options):
         main(options['url'])
