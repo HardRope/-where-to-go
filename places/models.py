@@ -5,6 +5,7 @@ class Place(models.Model):
     title = models.CharField(
         'Название',
         max_length=200,
+        unique=True,
     )
 
     description_short = models.TextField(
@@ -77,4 +78,3 @@ class PlaceImage(models.Model):
         verbose_name = 'изображение'
         verbose_name_plural = 'изображения'
         ordering = ('position',)
-
