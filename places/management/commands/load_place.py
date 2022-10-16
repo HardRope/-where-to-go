@@ -4,6 +4,7 @@ import requests
 
 from places.models import Place, PlaceImage
 
+from django.core.exceptions import MultipleObjectsReturned
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
 
@@ -23,6 +24,8 @@ def add_imgs_to_place(place, num, url):
         place_image.image.save(f'{image_title}.jpg', ContentFile(response.content), save=True)
     except requests.HTTPError:
         logging.info('Не удалось загрузить изображение')
+    except MultipleObjectsReturned:
+        logging.info('Существует больше одного места с таким названием')
 
 
 def add_place(json):
