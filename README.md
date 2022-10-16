@@ -54,7 +54,7 @@ python3 manage.py createsuperuser
 
 ## Help function
 
-To loading places info from url with JSON-data< looking like:
+To loading places info from url with JSON-data, looking like:
 
 ```commandline
 {
@@ -68,4 +68,10 @@ To loading places info from url with JSON-data< looking like:
         "lng": "99.99999",
         "lat": "99.9999999"
     }
+```
+
+Running script:
+
+```commandline
+python manage.py load_place *url*
 ```
