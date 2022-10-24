@@ -24,34 +24,37 @@ git clone https://github.com/HardRope/-where-to-go
 pip install -r requirements.txt
 ```
 
- 4. Make migrations:
+ 3. Create `.env` (example):
+
+```commandline 
+SECRET_KEY=django-insecure-b5et!+...           # secret key of your Django-project
+DEBUG=true                                     # true or false
+ALLOWED_HOSTS=127.0.0.1, .pythonanywhere.com   # hosts. For local: 127.0.0.1
+
+STATIC_URL=/static/                            # your static files url
+STATIC_ROOT=static                             # your static files dir name
+
+MEDIA_URL=/media/                              # media files url.  Format: '/media_url/'
+MEDIA_ROOT=media                               #media files dir name
+```
+
+ 4. Create db:
 
 ```commandline
-python3 manage.py makemigrations
-
 python3 manage.py migrate
 ```
 
- 5. Create `.env` and add data:
-
-```commandline
-SECRET_KEY= secret_key
-DEBUG= debug setting: true of false
-ALLOWED_HOSTS= hosts. For local: 127.0.0.1, .pythonanywhere.com
-
-STATIC_URL= your static files url. Format: '/static_url/'
-STATIC_ROOT= your static files dir name
-
-MEDIA_URL= media files url.  Format: '/media_url/'
-MEDIA_ROOT= media files dir name
-```
-
- 6. Create super user to django access:
+ 5. Create super user to django access:
 
 ```commandline
 python3 manage.py createsuperuser
 ```
 
+ 6. To start local site on `127.0.0.1:8000` domain:
+
+```commandline
+python3 manage.py runserver
+```
 ## Help function
 
 To loading places info from url with JSON-data, looking like:
