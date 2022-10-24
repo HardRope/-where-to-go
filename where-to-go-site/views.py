@@ -13,7 +13,7 @@ def show_main(request):
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
-                'coordinates': [float(location.lng), float(location.lat)]
+                'coordinates': [location.lng, location.lat]
             },
             'properties': {
                 'title': location.title,
