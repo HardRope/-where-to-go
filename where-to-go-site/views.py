@@ -24,7 +24,7 @@ def show_main(request):
         locations_format_geojson.append(formatted_location)
 
     context = {
-        'geojson' : {
+        'geojson': {
             'type': 'FeatureCollection',
             'features': locations_format_geojson
         }

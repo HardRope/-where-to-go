@@ -19,7 +19,11 @@ def add_imgs_to_place(place, num, url):
             position=num,
         )
 
-        place_image.image.save(f'{num} {place}',ContentFile(response.content), save=True)
+        place_image.image.save(
+            f'{num} {place}',
+            ContentFile(response.content),
+            save=True
+        )
     except requests.HTTPError:
         logging.info('Не удалось загрузить изображение')
     except MultipleObjectsReturned:
