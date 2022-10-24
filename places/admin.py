@@ -31,13 +31,11 @@ class ImageInline(SortableStackedInline):
         url = model.image.url
         return mark_safe(f'<img src="{url}" style="max-height: 200px;">')
 
-    def get_extra(self, request, obj=model.place):
-        extra = 2
-        if obj:
-            extra = 0
-            return extra
-        return extra
-
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj.images.count():
+            return 0
+        else:
+            return 2
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
