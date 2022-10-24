@@ -44,4 +44,4 @@ def get_place_json(request, place_id):
             'lng': place.lng,
         }
     }
-    return JsonResponse(context, safe=False, json_dumps_params={'indent': 2, 'ensure_ascii': False})
+    return JsonResponse(context, json_dumps_params={'ensure_ascii': False})
