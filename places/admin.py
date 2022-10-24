@@ -2,10 +2,10 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from adminsortable2.admin import SortableStackedInline, SortableAdminBase
 
-from .models import Place, PlaceImage
+from .models import Place, Image
 
-@admin.register(PlaceImage)
-class PlaceImageAdmin(admin.ModelAdmin):
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
     fields = (
         'title',
         'place',
@@ -19,8 +19,8 @@ class PlaceImageAdmin(admin.ModelAdmin):
     def preview(self, obj):
         return mark_safe(f'<img src="{obj.image.url}" style="max-height: 200px;">')
 
-class PlaceImageInline(SortableStackedInline):
-    model = PlaceImage
+class ImageInline(SortableStackedInline):
+    model = Image
     fields = ['image',  'preview', ]
 
     readonly_fields = ("preview",)
@@ -43,4 +43,4 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
         'description_long',
         'lng',
         'lat',)
-    inlines = (PlaceImageInline,)
+    inlines = (ImageInline,)

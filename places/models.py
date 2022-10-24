@@ -12,30 +12,23 @@ class Place(models.Model):
     description_short = models.TextField(
         'Краткое описание',
         blank=True,
-        null=True,
     )
 
     description_long = HTMLField(
         'Полное описание',
         blank=True,
-        null=True,
-
     )
 
     lng = models.DecimalField(
         'Долгота',
         max_digits=22,
         decimal_places=16,
-        blank=True,
-        null=True,
     )
 
     lat = models.DecimalField(
         'Широта',
         max_digits=22,
         decimal_places=16,
-        blank=True,
-        null=True,
     )
 
     class Meta:
@@ -46,7 +39,7 @@ class Place(models.Model):
         return self.title
 
 
-class PlaceImage(models.Model):
+class Image(models.Model):
     place = models.ForeignKey(
         'Place',
         on_delete=models.CASCADE,
@@ -60,15 +53,10 @@ class PlaceImage(models.Model):
         null=True,
     )
 
-    image = models.ImageField(
-        blank=True,
-        null=True,
-    )
+    image = models.ImageField()
 
     position = models.IntegerField(
         default=1,
-        blank=True,
-        null=True,
         db_index=True
     )
 
