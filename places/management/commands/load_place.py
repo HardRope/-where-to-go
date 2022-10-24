@@ -32,7 +32,7 @@ def add_imgs_to_place(place, num, url):
 def add_place(serialized_place):
     title = serialized_place.get('title')
 
-    place_description = {
+    place_descriptions = {
         'description_short': serialized_place.get('description_short', ''),
         'description_long': serialized_place.get('description_long', ''),
         'lng': serialized_place.get('coordinates').get('lng'),
@@ -40,20 +40,20 @@ def add_place(serialized_place):
     }
 
     if not title:
-        logging.info('Требуется указать название места в словаре')
+        logging.info('Требуется указать название места')
         return
-    elif not place_description['lng']:
+    elif not place_descriptions['lng']:
         logging.info('Требуется указать координаты долготы (lng)')
         return
-    elif not place_description['lat']:
-        logging.info('Требуется указать координаты долготы (lat)')
+    elif not place_descriptions['lat']:
+        logging.info('Требуется указать координаты широты (lat)')
         return
 
     images_urls = serialized_place['imgs']
 
     place, created = Place.objects.update_or_create(
         title=title,
-        defaults=place_description
+        defaults=place_descriptions
     )
 
     for num, url in enumerate(images_urls, start=1):
