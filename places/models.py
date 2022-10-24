@@ -46,13 +46,6 @@ class Image(models.Model):
         related_name='images',
     )
 
-    title = models.CharField(
-        'Название',
-        max_length=200,
-        blank=True,
-        null=True,
-    )
-
     image = models.ImageField()
 
     position = models.IntegerField(
@@ -66,4 +59,4 @@ class Image(models.Model):
         ordering = ('position',)
 
     def __str__(self):
-        return self.image.name
+        return f'{self.position} {self.place.title}'

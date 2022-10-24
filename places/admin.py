@@ -7,13 +7,11 @@ from .models import Place, Image
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     fields = (
-        'title',
         'place',
         'image',
         'position',
         'preview',
     )
-    list_display = ['title',]
     readonly_fields = ("preview",)
 
     def preview(self, obj):

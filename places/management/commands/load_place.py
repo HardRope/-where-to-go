@@ -2,7 +2,7 @@ import argparse
 import logging
 import requests
 
-from places.models import Place, PlaceImage
+from places.models import Place, Image
 
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.management.base import BaseCommand
@@ -14,10 +14,8 @@ def add_imgs_to_place(place, num, url):
         response = requests.get(url)
         response.raise_for_status()
 
-        image_title = f'{num} {place.title}'
-        place_image, created = PlaceImage.objects.get_or_create(
+        place_image, created = Image.objects.get_or_create(
             place=place,
-            title=image_title,
             position=num,
         )
 
