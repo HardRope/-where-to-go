@@ -1,4 +1,3 @@
-import argparse
 import logging
 import requests
 
@@ -30,14 +29,14 @@ def add_imgs_to_place(place, num, url):
         logging.info('Существует больше одного места с таким названием')
 
 
-def add_place(json):
-    title = json['title']
-    description_short = json['description_short']
-    description_long = json['description_long']
-    lng = json['coordinates']['lng']
-    lat = json['coordinates']['lat']
+def add_place(serialized_place):
+    title = serialized_place['title']
+    description_short = serialized_place['description_short']
+    description_long = serialized_place['description_long']
+    lng = serialized_place['coordinates']['lng']
+    lat = serialized_place['coordinates']['lat']
 
-    images_urls = json['imgs']
+    images_urls = serialized_place['imgs']
 
     place, created = Place.objects.get_or_create(
         title=title,
@@ -56,11 +55,11 @@ def main(url):
         response = requests.get(url)
         response.raise_for_status()
 
-        place_json = response.json()
+        serialized_place = response.json()
 
-        add_place(place_json)
+        add_place(serialized_place)
     except requests.HTTPError:
-        logging.info('Ошиибка загрузки. Проверьте ссылку')
+        logging.info('Ошибка загрузки. Проверьте ссылку')
 
 
 class Command(BaseCommand):
