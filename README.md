@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 ```commandline 
 SECRET_KEY=django-insecure-b5et!+...           # secret key of your Django-project
-DEBUG=true                                     # true or false
+DJANGO_DEBUG=true                              # true or false
 ALLOWED_HOSTS=127.0.0.1, .pythonanywhere.com   # hosts. For local: 127.0.0.1
 
 STATIC_URL=/static/                            # your static files url
