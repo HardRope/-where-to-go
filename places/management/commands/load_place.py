@@ -25,31 +25,28 @@ def load_place_image(place, num, url):
 
 
 def add_place(serialized_place):
-    title = serialized_place.get('title')
+    try:
+        title = serialized_place['title']
 
-    place_descriptions = {
-        'description_short': serialized_place.get('description_short', ''),
-        'description_long': serialized_place.get('description_long', ''),
-        'lng': serialized_place.get('coordinates').get('lng'),
-        'lat': serialized_place.get('coordinates').get('lat'),
-    }
-
-    if not title:
-        logging.info('Требуется указать название места')
-        return
-    elif not place_descriptions['lng']:
-        logging.info('Требуется указать координаты долготы (lng)')
-        return
-    elif not place_descriptions['lat']:
-        logging.info('Требуется указать координаты широты (lat)')
+        place_descriptions = {
+            'description_short': serialized_place.get('description_short', ''),
+            'description_long': serialized_place.get('description_long', ''),
+            'lng': serialized_place['coordinates']['lng'],
+            'lat': serialized_place['coordinates']['lat'],
+            'images': serialized_place.get('imgs', []),
+        }
+    except KeyError:
+        logging.info(f'Не хватает обязательного аргумента {KeyError}')
         return
 
-    images_urls = serialized_place['imgs']
+    images_urls = place_descriptions['images']
 
     place, created = Place.objects.update_or_create(
         title=title,
         defaults=place_descriptions
     )
+    if not created:
+        return
 
     for num, url in enumerate(images_urls, start=1):
         load_place_image(place, num, url)
