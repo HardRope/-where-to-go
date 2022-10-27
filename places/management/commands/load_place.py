@@ -16,12 +16,7 @@ def load_place_image(place, num, url):
         place_image, created = Image.objects.get_or_create(
             place=place,
             position=num,
-        )
-
-        place_image.image.save(
-            f'{num} {place}',
-            ContentFile(response.content),
-            save=True
+            image=ContentFile(response.content, name=f'{num} {place}')
         )
     except requests.HTTPError:
         logging.info('Не удалось загрузить изображение')
