@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
 
 
-def add_imgs_to_place(place, num, url):
+def load_place_image(place, num, url):
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -57,7 +57,7 @@ def add_place(serialized_place):
     )
 
     for num, url in enumerate(images_urls, start=1):
-        add_imgs_to_place(place, num, url)
+        load_place_image(place, num, url)
 
 
 def main(url):

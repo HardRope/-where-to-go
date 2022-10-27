@@ -15,7 +15,6 @@ class ImageAdmin(admin.ModelAdmin):
     )
     readonly_fields = ('preview',)
 
-
     def preview(self, obj):
         url = obj.image.url
         return mark_safe(f'<img src="{url}" style="max-height: 200px;">')
@@ -32,10 +31,8 @@ class ImageInline(SortableStackedInline):
         return mark_safe(f'<img src="{url}" style="max-height: 200px;">')
 
     def get_extra(self, request, obj=None, **kwargs):
-        if obj.images.count():
-            return 0
-        else:
-            return 2
+        return 0 if obj.images.count() else 2
+
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
