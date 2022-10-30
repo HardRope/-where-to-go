@@ -35,8 +35,8 @@ def add_place(serialized_place):
             'lat': serialized_place['coordinates']['lat'],
             'images': serialized_place.get('imgs', []),
         }
-    except KeyError:
-        logging.info(f'Не хватает обязательного аргумента {KeyError}')
+    except KeyError as unfinded_key:
+        logging.error(f'Не хватает обязательного аргумента {unfinded_key}')
         return
 
     images_urls = place_descriptions['images']
