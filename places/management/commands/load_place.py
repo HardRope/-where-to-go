@@ -33,13 +33,10 @@ def add_place(serialized_place):
             'description_long': serialized_place.get('description_long', ''),
             'lng': serialized_place['coordinates']['lng'],
             'lat': serialized_place['coordinates']['lat'],
-            'images': serialized_place.get('imgs', []),
         }
     except KeyError as unfinded_key:
         logging.error(f'Не хватает обязательного аргумента {unfinded_key}')
         return
-
-    images_urls = place_descriptions['images']
 
     place, created = Place.objects.update_or_create(
         title=title,
@@ -48,6 +45,7 @@ def add_place(serialized_place):
     if not created:
         return
 
+    images_urls = serialized_place.get('imgs', [])
     for num, url in enumerate(images_urls, start=1):
         load_place_image(place, num, url)
 
